@@ -5,4 +5,15 @@
 <div>loading...</div>
 }
 <pre>{{data | json}}</pre>
-<button type="button" (click)="makePost()">Make Post</button>
+<button type="button" (click)="makePost()">Make Post</button><br>
+<br>
+<button type="button" (click)="makeTypedRequest()">Make typed request</button>
+<div *ngFor="let art of fooData">
+    <h3>{{art.title}}</h3>
+    <b>post {{art.id}} di utente #: {{art.userId}}</b>
+    <div>
+        {{art.body}}
+    </div>
+    <hr>
+ </div>
+   

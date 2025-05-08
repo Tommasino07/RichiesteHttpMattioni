@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Foo } from './foo.model';
 
 @Component({
   selector: 'app-foo',
@@ -14,6 +15,10 @@ export class FooComponent {
   loading!: boolean;
   o! :Observable<Object>;
   o2! :Observable<Object>;
+  fooData! : Foo[];
+  oFoo! : Observable<Foo[]>;
+
+
 
 
 constructor(public http: HttpClient) {}  
@@ -50,6 +55,12 @@ constructor(public http: HttpClient) {}
     {
       this.data = d; //Notifico l’oggetto ricevuto dal server
       this.loading = false;  // Notifico che ho ricevuto i dati
+    }
+
+    makeTypedRequest() : void
+    {
+      this.oFoo = this.http.get<Foo[]>('https://jsonplaceholder.typicode.com/posts');
+      this.oFoo.subscribe(data => {this.fooData = data});
     }
 
 

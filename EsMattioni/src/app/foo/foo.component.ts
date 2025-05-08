@@ -13,6 +13,7 @@ export class FooComponent {
   data!: Object;
   loading!: boolean;
   o! :Observable<Object>;
+  o2! :Observable<Object>;
 
 
 constructor(public http: HttpClient) {}  
@@ -32,5 +33,24 @@ constructor(public http: HttpClient) {}
     this.data = d; //Notifico l’oggetto ricevuto dal server
     this.loading = false;  // Notifico che ho ricevuto i dati
   }
+
+  makePost(): void {
+    this.loading = true;
+    let datidainviare = {
+      body: 'bar',
+      title: 'foo',
+      userId: 1
+    };
+    this.o2 = this.http.post('https://jsonplaceholder.typicode.com/posts', datidainviare)
+    this.o2.subscribe(this.getData2)
+  
+      
+  }
+  getData2 = (d : Object) =>
+    {
+      this.data = d; //Notifico l’oggetto ricevuto dal server
+      this.loading = false;  // Notifico che ho ricevuto i dati
+    }
+
 
 }
